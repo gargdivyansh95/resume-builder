@@ -1,6 +1,5 @@
 import { Home } from "./Website";
-import { Signup } from "./Signup/Signup";
-import { Login } from "./Login/Login";
+import { Login, Signup } from "./application/index";
 
 export {
     Home,
