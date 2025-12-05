@@ -11,33 +11,23 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: "root",
   storage,
-//   whitelist: ["resume"],
+  whitelist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// const store = configureStore({
-//   reducer: persistedReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       thunk: false,
-//       serializableCheck: false,
-//     }).concat(sagaMiddleware),
-//     devTools: process.env.NODE_ENV !== "production", // ✅ DevTools enable/disable
-//     enhancers: (defaultEnhancers) =>
-//         process.env.NODE_ENV !== "production"
-//         ? [composeWithDevTools(...defaultEnhancers)]
-//         : defaultEnhancers,
-// });
-
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      thunk: false, // Redux Saga use kar rahe hain
+      thunk: false,
       serializableCheck: false,
     }).concat(sagaMiddleware),
-  devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production", // ✅ DevTools enable/disable
+    // enhancers: (defaultEnhancers) =>
+    //     process.env.NODE_ENV !== "production"
+    //     ? [composeWithDevTools(...defaultEnhancers)]
+    //     : defaultEnhancers,
 });
 
 sagaMiddleware.run(rootSaga);

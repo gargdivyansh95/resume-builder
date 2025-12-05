@@ -1,5 +1,5 @@
 import { Home } from "./website";
-import { Login, Signup, Dashboard } from "./application/";
+import { Login, Signup, Dashboard } from "./application";
 
 export {
     Home,
