@@ -1,0 +1,21 @@
+Next Js + React Js
+Tailwind CSS Library - For CSS
+Shadcn - For UI Library
+Axios - For API Calls
+Redux Saga - Global State Management
+
+Step 1: create app first
+npx create-next-app@latest my-app
+
+Step 2: Tailwind Setup (For manually congifure if not installed when creating app on step 1 command, it will ask you to install tailwind)
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+Step 3: Shadcn Setup
+npx shadcn-ui@latest init
+
+Step 4: To install any components
+npx shadcn-ui add button
+
+Step 5: To run the project
+npm run dev
