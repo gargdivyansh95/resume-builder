@@ -1,4 +1,4 @@
-import { Home } from "./Website";
+import { Home } from "./website";
 import { Login, Signup, Dashboard } from "./application/";
 
 export {
