@@ -10,7 +10,7 @@ import LoginSchema from '@/validations/Login.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './auth.action';
 
 export const Login = () => {

@@ -2,7 +2,6 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import { actionTypes, authActions } from './auth.action';
 
-// Login API call
 export function* postLogin(action) {
     const body = action.payload;
     try {
@@ -19,7 +18,20 @@ export function* postLogin(action) {
     }
 }
 
+export function* postLogout(action) {
+    try {
+        const response = yield call(axios.post, "/api/auth/logout");
+        if (response.status === 200) {
+            yield put(authActions.postLogoutSuccess());
+            action.onSuccess(response.data);
+        }
+    } catch (error) {
+        console.error("Logout Error:", error);
+    }
+}
+
 // Watcher saga
 export function* saga() {
     yield takeLatest(actionTypes.PostLogin, postLogin);
+    yield takeLatest(actionTypes.PostLogout, postLogout);
 }

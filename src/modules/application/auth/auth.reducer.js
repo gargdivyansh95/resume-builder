@@ -14,6 +14,9 @@ export const authReducer = (state = initialState, action) => {
             } else {
                 return { ...state, user: null, authToken: null };
             }
+        
+        case actionTypes.PostLogoutSuccess:
+            return { ...state, user: null, authToken: null };
         default:
             return state;
     }
