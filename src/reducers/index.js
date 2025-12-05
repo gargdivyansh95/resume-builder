@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-// import themeReducer from '../style/Theme.reducer';
+import {authReducer} from '../modules/application/auth/auth.reducer';
 
 export const rootReducer = combineReducers({
     // theme: themeReducer,
+    auth: authReducer,
 });
 
 export default rootReducer;
