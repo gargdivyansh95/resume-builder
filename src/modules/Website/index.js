@@ -1,2 +1,2 @@
-import { Home } from "./Home/Home";
+import { Home } from "./home/home";
 export { Home }

@@ -7,40 +7,15 @@ export function* postLogin(action) {
     const body = action.payload;
     try {
         const response = yield call(axios.post, '/api/auth/login', body);
-        console.log(response, 'rrrrr')
-        if (response) {
-            yield put(authActions.postLoginSuccess(response));
+        if (response.status === 200) {
+            yield put(authActions.postLoginSuccess(response.data));
             action.onSuccess(response.data);
+        } else {
+            action.onError(response.data);
         }
-        // const result = response.data;
-
-        // if (result.success) {
-        //     // Store token in localStorage
-        //     if (result.data.token) {
-        //         localStorage.setItem('authToken', result.data.token);
-        //     }
-
-        //     // Dispatch success action
-        //     yield put(
-        //         loginSuccess({
-        //             user: result.data,
-        //             token: result.data.token,
-        //         })
-        //     );
-
-        //     // toast.success('Login Successful!');
-
-        //     // Redirect (optional - component mein bhi kar sakte ho)
-        //     // window.location.href = '/dashboard';
-        // } else {
-        //     yield put(loginFailure(result.error || 'Login failed'));
-        //     // toast.error(result.error || 'Login failed');
-        // }
     } catch (error) {
         console.error('Login Saga Error:', error);
-        const message = error.response?.data?.error || 'Something went wrong';
-        // yield put(loginFailure(message));
-        // toast.error(message);
+        action.onError(error.response.data);
     }
 }
 

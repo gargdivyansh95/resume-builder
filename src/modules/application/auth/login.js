@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 import LoginSchema from '@/validations/Login.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
-import axios from 'axios';
 import { toast } from 'sonner';
 import { useDispatch } from 'react-redux';
 import { authActions } from './auth.action';
@@ -33,39 +32,18 @@ export const Login = () => {
             expiresInMins: 30
         }
         setLoading(true);
-        // try {
-        //     const response = await axios.post('/api/auth/login', {
-        //         username: data.email,
-        //         password: data.password,
-        //         expiresInMins: 30
-        //     });
-        //     const result = response.data;
-        //     console.log(result, 'Login Response');
-        //     if (result.success) {
-        //         toast.success("Login Successful!");
-        //         reset();
-        //         // router.push('/dashboard');
-        //     } else {
-        //         toast.error(result.error || 'Login failed');
-        //     }
-        // } catch (error) {
-        //     console.error('Login Error:', error);
-        //     const message = error.response?.data?.error || 'Something went wrong. Please try again.';
-        //     toast.error(message);
-        // } finally {
-        //     setLoading(false);
-        // }
         dispatch(authActions.postLogin(
             payload,
-            (res) => {
-                console.log(res, 'rrrrr')
-                // toast.success("Login Successful!");
-                // reset();
-                // router.push('/dashboard');
-                setLoading(false);
+            (response) => {
+                if (response.success === true) {
+                    setLoading(false);
+                    toast.success("Login Successful!");
+                    // reset();
+                    router.push('/dashboard');
+                }
             },
-            (err) => {
-                toast.error(err || 'Login failed');
+            (error) => {
+                toast.error(error.error || 'Login failed');
                 setLoading(false);
             },
         ))

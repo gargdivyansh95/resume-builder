@@ -13,7 +13,7 @@ export const Home = () => {
 
     return (
         <div>
-            <h1 className="text-4xl font-bold">Welcome to Resume Builder</h1>
+            <h1 className="text-4xl font-bold">This is Resume Builder Website</h1>
             <Button variant='default' className="mt-4" onClick={handleSignup}>Get Started</Button>
         </div>
     )
